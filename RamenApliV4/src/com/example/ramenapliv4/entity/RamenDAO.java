@@ -3,12 +3,12 @@ package com.example.ramenapliv4.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.ramenapliv4.dto.RamenFoodDTO;
-import com.example.ramenapliv4.dto.RamenShopDTO;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.ramenapliv4.dto.RamenFoodDTO;
+import com.example.ramenapliv4.dto.RamenShopDTO;
 
 public class RamenDAO {
 
@@ -55,7 +55,8 @@ public class RamenDAO {
 		values.put("rating", dto.getRating());
 		values.put("comment", dto.getComment());
 		values.put("pict", dto.getPict());
-		db.update("ramen_shop", values, "_id=?", new String[]{dto.getId().toString()});
+		db.update("ramen_shop", values, "_id=?", new String[] { dto.getId()
+				.toString() });
 	}
 
 	public RamenShopDTO findRamenShopById(String idstr) {
@@ -137,7 +138,8 @@ public class RamenDAO {
 		values.put("rating", dto.getRating());
 		values.put("comment", dto.getComment());
 		values.put("pict", dto.getPict());
-		db.update("ramen_food", values, "_id=?", new String[]{dto.getId().toString()});
+		db.update("ramen_food", values, "_id=?", new String[] { dto.getId()
+				.toString() });
 	}
 
 	public void deleteRamenFood(String idstr) {

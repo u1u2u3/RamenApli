@@ -1,16 +1,5 @@
 package com.example.ramenapliv4.activity;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.R.layout;
-import com.example.ramenapliv4.dto.RamenShopDTO;
-import com.example.ramenapliv4.entity.RamenDAO;
-import com.example.ramenapliv4.entity.RamenOpenHelper;
-import com.example.ramenapliv4.util.RamenUtil;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -18,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -28,8 +16,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
@@ -38,6 +24,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenShopDTO;
+import com.example.ramenapliv4.entity.RamenDAO;
+import com.example.ramenapliv4.entity.RamenOpenHelper;
+import com.example.ramenapliv4.util.RamenUtil;
 
 public class CreateShopActivity extends Activity implements LocationListener {
 
@@ -200,10 +192,11 @@ public class CreateShopActivity extends Activity implements LocationListener {
 	}
 
 	private void setInfoFromPict(Uri imageUri) {
-		
+
 		Bitmap resizedBitmap = RamenUtil.getResizedBitmap(imageUri, this);
-		((ImageView) findViewById(R.id.img_ramenpict)).setImageBitmap(resizedBitmap);
-		
+		((ImageView) findViewById(R.id.img_ramenpict))
+				.setImageBitmap(resizedBitmap);
+
 		ExifInterface exifInterface = null;
 		try {
 			ContentResolver resolver = getContentResolver();

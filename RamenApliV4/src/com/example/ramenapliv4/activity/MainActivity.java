@@ -1,8 +1,5 @@
 package com.example.ramenapliv4.activity;
 
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.menu;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +7,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.ramenapliv4.R;
 
 public class MainActivity extends ListActivity {
 

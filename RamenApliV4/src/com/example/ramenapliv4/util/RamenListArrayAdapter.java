@@ -2,10 +2,6 @@ package com.example.ramenapliv4.util;
 
 import java.util.List;
 
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.dto.RamenFoodDTO;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenFoodDTO;
 
 public class RamenListArrayAdapter extends ArrayAdapter<RamenFoodDTO> {
 

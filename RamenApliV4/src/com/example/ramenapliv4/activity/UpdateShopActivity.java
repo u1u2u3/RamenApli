@@ -3,19 +3,12 @@ package com.example.ramenapliv4.activity;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.R.layout;
-import com.example.ramenapliv4.dto.RamenShopDTO;
-import com.example.ramenapliv4.entity.RamenDAO;
-import com.example.ramenapliv4.entity.RamenOpenHelper;
-
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +36,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenShopDTO;
+import com.example.ramenapliv4.entity.RamenDAO;
+import com.example.ramenapliv4.entity.RamenOpenHelper;
+
 public class UpdateShopActivity extends Activity implements LocationListener {
 
 	private static final int REQUEST_GALLERY_CODE = 0;
@@ -58,7 +56,7 @@ public class UpdateShopActivity extends Activity implements LocationListener {
 				LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		setContentView(R.layout.activity_updateshop);
-		
+
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ActionBar.Tab tab1 = actionBar.newTab();
@@ -66,17 +64,17 @@ public class UpdateShopActivity extends Activity implements LocationListener {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
 			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab1);
@@ -85,60 +83,77 @@ public class UpdateShopActivity extends Activity implements LocationListener {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
 			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(UpdateShopActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						UpdateShopActivity.this);
 				builder.setMessage("削除しますか？");
-				builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						RamenOpenHelper helper = new RamenOpenHelper(getApplicationContext());
-						SQLiteDatabase db = helper.getReadableDatabase();
-						final RamenDAO dao = new RamenDAO(db);
-						dao.deleteRamenShop(dto_before.getId().toString());
-						Intent intent = new Intent(UpdateShopActivity.this, RamenMapActivity.class);
-						finish();
-						startActivity(intent);
-						Toast.makeText(getApplicationContext(), "削除しました。", Toast.LENGTH_SHORT).show();
-					}
-				});
-				builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						actionBar.setSelectedNavigationItem(0);
-					}
-				});
+				builder.setPositiveButton("OK",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								RamenOpenHelper helper = new RamenOpenHelper(
+										getApplicationContext());
+								SQLiteDatabase db = helper
+										.getReadableDatabase();
+								final RamenDAO dao = new RamenDAO(db);
+								dao.deleteRamenShop(dto_before.getId()
+										.toString());
+								Intent intent = new Intent(
+										UpdateShopActivity.this,
+										RamenMapActivity.class);
+								finish();
+								startActivity(intent);
+								Toast.makeText(getApplicationContext(),
+										"削除しました。", Toast.LENGTH_SHORT).show();
+							}
+						});
+				builder.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								actionBar.setSelectedNavigationItem(0);
+							}
+						});
 				builder.create().show();
-				
+
 			}
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab2);
 
 		Intent intent = getIntent();
 		final String shopid = intent.getStringExtra("shopid");
-		RamenOpenHelper helper = new RamenOpenHelper(
-				getApplicationContext());
+		RamenOpenHelper helper = new RamenOpenHelper(getApplicationContext());
 		SQLiteDatabase db = helper.getWritableDatabase();
 		RamenDAO dao = new RamenDAO(db);
 		dto_before = dao.findRamenShopById(shopid);
-		
-		((EditText) findViewById(R.id.txt_update_shopname)).setText(dto_before.getName());
-		Bitmap bitmap = BitmapFactory.decodeByteArray(dto_before.getPict(), 0, dto_before.getPict().length);
-		((ImageView) findViewById(R.id.img_update_ramenpict)).setImageBitmap(bitmap);
-		((EditText) findViewById(R.id.txt_update_lat)).setText(dto_before.getLatitude().toString());
-		((EditText) findViewById(R.id.txt_update_lon)).setText(dto_before.getLongitude().toString());
-		((RatingBar) findViewById(R.id.rat_update_rating)).setRating(dto_before.getRating());
-		((EditText) findViewById(R.id.txt_update_comment)).setText(dto_before.getComment());
+
+		((EditText) findViewById(R.id.txt_update_shopname)).setText(dto_before
+				.getName());
+		Bitmap bitmap = BitmapFactory.decodeByteArray(dto_before.getPict(), 0,
+				dto_before.getPict().length);
+		((ImageView) findViewById(R.id.img_update_ramenpict))
+				.setImageBitmap(bitmap);
+		((EditText) findViewById(R.id.txt_update_lat)).setText(dto_before
+				.getLatitude().toString());
+		((EditText) findViewById(R.id.txt_update_lon)).setText(dto_before
+				.getLongitude().toString());
+		((RatingBar) findViewById(R.id.rat_update_rating)).setRating(dto_before
+				.getRating());
+		((EditText) findViewById(R.id.txt_update_comment)).setText(dto_before
+				.getComment());
 
 		Button btn_takepict = (Button) findViewById(R.id.btn_update_takepict);
 		btn_takepict.setOnClickListener(new OnClickListener() {

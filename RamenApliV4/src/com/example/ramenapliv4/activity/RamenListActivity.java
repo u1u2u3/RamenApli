@@ -2,18 +2,10 @@ package com.example.ramenapliv4.activity;
 
 import java.util.List;
 
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.layout;
-import com.example.ramenapliv4.dto.RamenFoodDTO;
-import com.example.ramenapliv4.entity.RamenDAO;
-import com.example.ramenapliv4.entity.RamenOpenHelper;
-import com.example.ramenapliv4.util.RamenListArrayAdapter;
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -26,8 +18,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenFoodDTO;
+import com.example.ramenapliv4.entity.RamenDAO;
+import com.example.ramenapliv4.entity.RamenOpenHelper;
+import com.example.ramenapliv4.util.RamenListArrayAdapter;
+
 public class RamenListActivity extends ListActivity {
-	
+
 	// 0=表示, 1=編集, 2=削除
 	private int mode = 0;
 
@@ -48,7 +46,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
@@ -59,7 +57,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab1);
@@ -68,7 +66,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
@@ -81,7 +79,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab2);
@@ -90,7 +88,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
@@ -101,7 +99,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab3);
@@ -110,7 +108,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 
 			@Override
@@ -121,7 +119,7 @@ public class RamenListActivity extends ListActivity {
 
 			@Override
 			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				
+
 			}
 		});
 		actionBar.addTab(tab4);
@@ -137,42 +135,49 @@ public class RamenListActivity extends ListActivity {
 		setListAdapter(adapter);
 
 	}
-	
+
 	@Override
-	protected void onListItemClick(ListView l, View v, final int position, long id) {
+	protected void onListItemClick(ListView l, View v, final int position,
+			long id) {
 		super.onListItemClick(l, v, position, id);
 		if (mode == 1) {
 			RamenFoodDTO dto = items.get(position);
-			Intent intent = new Intent(RamenListActivity.this, UpdateRamenActivity.class);
+			Intent intent = new Intent(RamenListActivity.this,
+					UpdateRamenActivity.class);
 			intent.putExtra("foodid", dto.getId().toString());
 			startActivity(intent);
-			
+
 		} else if (mode == 2) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("削除しますか？");
-			builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					RamenFoodDTO dto = items.get(position);
-					RamenOpenHelper helper = new RamenOpenHelper(getApplicationContext());
-					SQLiteDatabase db = helper.getReadableDatabase();
-					final RamenDAO dao = new RamenDAO(db);
-					dao.deleteRamenFood(dto.getId().toString());
-					Intent intent = new Intent(RamenListActivity.this, RamenListActivity.class);
-					intent.putExtra("shopid", shopid);
-					finish();
-					startActivity(intent);
-					Toast.makeText(getApplicationContext(), "削除しました。", Toast.LENGTH_SHORT).show();
-				}
-			});
-			builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					
-				}
-			});
+			builder.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							RamenFoodDTO dto = items.get(position);
+							RamenOpenHelper helper = new RamenOpenHelper(
+									getApplicationContext());
+							SQLiteDatabase db = helper.getReadableDatabase();
+							final RamenDAO dao = new RamenDAO(db);
+							dao.deleteRamenFood(dto.getId().toString());
+							Intent intent = new Intent(RamenListActivity.this,
+									RamenListActivity.class);
+							intent.putExtra("shopid", shopid);
+							finish();
+							startActivity(intent);
+							Toast.makeText(getApplicationContext(), "削除しました。",
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+			builder.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+						}
+					});
 			builder.create().show();
 		}
 	}

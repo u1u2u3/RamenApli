@@ -22,18 +22,18 @@ public class RamenUtil {
 			InputStream in = resolver.openInputStream(imageUri);
 			Bitmap bitmap = BitmapFactory.decodeStream(in);
 			in.close();
-	
+
 			// 画面サイズを取得する
 			Matrix matrix = new Matrix();
 			DisplayMetrics metrics = new DisplayMetrics();
 			activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 			float screenWidth = (float) metrics.widthPixels;
 			float screenHeight = (float) metrics.heightPixels;
-			
+
 			// 元画像のサイズを取得する
 			int srcWidth = bitmap.getWidth();
 			int srcHeight = bitmap.getHeight();
-			
+
 			// 画面に収まるように元画像を調整する
 			float widthScale = screenWidth / srcWidth;
 			float heightScale = screenHeight / srcHeight;
@@ -59,9 +59,9 @@ public class RamenUtil {
 			stream = new ByteArrayOutputStream();
 			shopbitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
 		} while (stream.toByteArray().length >= MAX_IMAGE_SIZE);
-		Log.i("ramenapli", "圧縮率:"+quality);
-		Log.i("ramenapli", "画像サイズ:"+stream.toByteArray().length);
+		Log.i("ramenapli", "圧縮率:" + quality);
+		Log.i("ramenapli", "画像サイズ:" + stream.toByteArray().length);
 		return stream.toByteArray();
 	}
-	
+
 }

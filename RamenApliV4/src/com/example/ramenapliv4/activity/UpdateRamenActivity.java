@@ -5,13 +5,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.R.layout;
-import com.example.ramenapliv4.dto.RamenFoodDTO;
-import com.example.ramenapliv4.entity.RamenDAO;
-import com.example.ramenapliv4.entity.RamenOpenHelper;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -33,6 +26,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenFoodDTO;
+import com.example.ramenapliv4.entity.RamenDAO;
+import com.example.ramenapliv4.entity.RamenOpenHelper;
 
 public class UpdateRamenActivity extends Activity {
 
@@ -57,12 +55,18 @@ public class UpdateRamenActivity extends Activity {
 		final RamenDAO dao = new RamenDAO(db);
 		dto_before = dao.findRamenFoodByFoodId(foodid);
 
-		((EditText) findViewById(R.id.txt_update_foodname)).setText(dto_before.getName());
-		Bitmap bitmap = BitmapFactory.decodeByteArray(dto_before.getPict(), 0, dto_before.getPict().length);
-		((ImageView) findViewById(R.id.img_update_foodpict)).setImageBitmap(bitmap);
-		((EditText) findViewById(R.id.date_update_fooddate)).setText(dto_before.getDate());
-		((RatingBar) findViewById(R.id.rat_update_foodrating)).setRating(dto_before.getRating());
-		((EditText) findViewById(R.id.txt_update_foodcomment)).setText(dto_before.getComment());
+		((EditText) findViewById(R.id.txt_update_foodname)).setText(dto_before
+				.getName());
+		Bitmap bitmap = BitmapFactory.decodeByteArray(dto_before.getPict(), 0,
+				dto_before.getPict().length);
+		((ImageView) findViewById(R.id.img_update_foodpict))
+				.setImageBitmap(bitmap);
+		((EditText) findViewById(R.id.date_update_fooddate)).setText(dto_before
+				.getDate());
+		((RatingBar) findViewById(R.id.rat_update_foodrating))
+				.setRating(dto_before.getRating());
+		((EditText) findViewById(R.id.txt_update_foodcomment))
+				.setText(dto_before.getComment());
 
 		Button btn_selectpict = (Button) findViewById(R.id.btn_update_selectfoodpict);
 		btn_selectpict.setOnClickListener(new OnClickListener() {

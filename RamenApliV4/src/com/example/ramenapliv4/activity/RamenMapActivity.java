@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.R.layout;
 import com.example.ramenapliv4.dto.RamenShopDTO;
 import com.example.ramenapliv4.entity.RamenDAO;
 import com.example.ramenapliv4.entity.RamenOpenHelper;
@@ -180,19 +178,19 @@ public class RamenMapActivity extends FragmentActivity implements
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 			}
 		});
-		builder.setNeutralButton("店情報",
-				new DialogInterface.OnClickListener() {
+		builder.setNeutralButton("店情報", new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(RamenMapActivity.this, UpdateShopActivity.class);
-						intent.putExtra("shopid", id);
-						startActivity(intent);
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(RamenMapActivity.this,
+						UpdateShopActivity.class);
+				intent.putExtra("shopid", id);
+				startActivity(intent);
+			}
+		});
 		builder.setNegativeButton("メニュー",
 				new DialogInterface.OnClickListener() {
 

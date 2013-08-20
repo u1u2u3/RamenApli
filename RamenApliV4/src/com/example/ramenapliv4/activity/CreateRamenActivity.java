@@ -1,17 +1,8 @@
 package com.example.ramenapliv4.activity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.example.ramenapliv4.R;
-import com.example.ramenapliv4.R.id;
-import com.example.ramenapliv4.R.layout;
-import com.example.ramenapliv4.dto.RamenFoodDTO;
-import com.example.ramenapliv4.entity.RamenDAO;
-import com.example.ramenapliv4.entity.RamenOpenHelper;
-import com.example.ramenapliv4.util.RamenUtil;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -34,6 +25,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.ramenapliv4.R;
+import com.example.ramenapliv4.dto.RamenFoodDTO;
+import com.example.ramenapliv4.entity.RamenDAO;
+import com.example.ramenapliv4.entity.RamenOpenHelper;
+import com.example.ramenapliv4.util.RamenUtil;
 
 public class CreateRamenActivity extends Activity {
 
